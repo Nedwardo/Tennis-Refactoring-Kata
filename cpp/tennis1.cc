@@ -1,58 +1,40 @@
 #include <string>
+std::string* scoreRepresentations = new std::string[]{
+    "Love",
+    "Fifteen",
+    "Thirty",
+    "Forty"
+};
+std::string getDisplayedScoreWhenPastDeuce(int p1Score, int p2Score)
+{
+    std::string output;
+    if (p1Score == p2Score)
+        return "Love-All";
 
-std::string tennis_score(int p1Score, int p2Score) {
-    std::string score;
-    int tempScore;
-    if (p1Score==p2Score)
-    {
-        switch (p1Score)
-        {
-            case 0:
-                    score = "Love-All";
-                break;
-            case 1:
-                    score = "Fifteen-All";
-                break;
-            case 2:
-                    score = "Thirty-All";
-                break;
-            default:
-                    score = "Deuce";
-                break;
-
-        }
-    }
-    else if (p1Score>=4 || p2Score>=4)
-    {
-        int minusResult = p1Score-p2Score;
-        if (minusResult==1) score ="Advantage player1";
-        else if (minusResult ==-1) score ="Advantage player2";
-        else if (minusResult>=2) score = "Win for player1";
-        else score ="Win for player2";
-    }
+    if (abs(p1Score - p2Score) == 1)
+        output = "Advantage ";
     else
-    {
-        for (int i=1; i<3; i++)
-        {
-            if (i==1) tempScore = p1Score;
-            else { score+="-"; tempScore = p2Score;}
-            switch(tempScore)
-            {
-                case 0:
-                    score+="Love";
-                    break;
-                case 1:
-                    score+="Fifteen";
-                    break;
-                case 2:
-                    score+="Thirty";
-                    break;
-                case 3:
-                    score+="Forty";
-                    break;
-            }
-        }
-    }
-    return score;
-    
+        output = "Win for ";
+
+    if (p1Score > p2Score)
+        output += "player1";
+    else
+        output += "player2";
+
+    return output;
+}
+//TODO doesn't handle love-all
+std::string tennis_score(int p1Score, int p2Score)
+{
+    if (p1Score == p2Score && p1Score >= 3)
+        return "Deuce";
+    if (p1Score >= 4 || p2Score >= 4)
+        return getDisplayedScoreWhenPastDeuce(p1Score, p2Score);
+
+    std::string displayedScore = scoreRepresentations[p1Score] + "-";
+    if (p1Score == p2Score)
+        return displayedScore + "All";
+    else
+        return  displayedScore + scoreRepresentations[p2Score];
+
 }
