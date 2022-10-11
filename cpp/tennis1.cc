@@ -1,8 +1,8 @@
 #include <string>
 
-const std::string tennis_score(int p1Score, int p2Score) {
-    std::string score = "";
-    int tempScore=0;
+std::string tennis_score(int p1Score, int p2Score) {
+    std::string score;
+    int tempScore;
     if (p1Score==p2Score)
     {
         switch (p1Score)

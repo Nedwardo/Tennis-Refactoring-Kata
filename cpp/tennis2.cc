@@ -1,9 +1,9 @@
 #include <string>
 
-const std::string tennis_score(int p1Score, int p2Score) {
-    std::string score = "";
-    std::string P1res = "";
-    std::string P2res = "";
+std::string tennis_score(int p1Score, int p2Score) {
+    std::string score;
+    std::string P1res;
+    std::string P2res;
     if (p1Score == p2Score && p1Score < 4)
     {
         if (p1Score==0)
